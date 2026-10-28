@@ -1,6 +1,6 @@
 """Support desk on DuckDB 2.0, one story. Usage: python desk/run.py [act number ...]"""
 import importlib, os, sys, tempfile
-sys.path.insert(0, os.path.dirname(__file__))
+sys.path[:0] = [os.path.dirname(__file__), os.path.dirname(os.path.dirname(os.path.abspath(__file__)))]
 
 ACTS = ["a1_ingest", "a2_triggers", "a3_quack", "a4_similar", "a5_graph", "a6_ai", "a7_timetravel", "a8_agent"]
 

@@ -1,6 +1,6 @@
 import os
 import duckdb
-from ui import act, say, show
+from common.ui import act, say, show
 
 
 def run(ctx):

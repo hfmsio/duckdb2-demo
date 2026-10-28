@@ -1,9 +1,14 @@
-"""Story output helpers: narration, and statements printed with their results."""
+"""Story output helpers: headings, narration, and statements printed with their results."""
 import re
 
 
-def act(n, title, blurb):
-    print(f"\n\n  ACT {n}: {title}\n  {blurb}")
+def _heading(kind):
+    def head(n, title, blurb):
+        print(f"\n\n  {kind} {n}: {title}\n  {blurb}")
+    return head
+
+
+act, recipe = _heading("ACT"), _heading("RECIPE")
 
 
 def say(text):

@@ -1,6 +1,6 @@
 import duckdb
 from data import insert_sql, tickets
-from ui import act, say, show
+from common.ui import act, say, show
 
 
 def run(ctx):
@@ -14,6 +14,6 @@ def run(ctx):
     say("New tickets land in the inbox. One statement moves the new ones into tickets.")
     con.execute(insert_sql("inbox", tickets(5, start=61)))
     show(con, "INSERT INTO tickets SELECT id, unnest(parse_ticket(payload)) FROM inbox WHERE id NOT IN (SELECT id FROM tickets)")
-    show(con, "SELECT * FROM audit", rows=4)
+    show(con, "SELECT * FROM audit ORDER BY ticket", rows=4)
     show(con, "SELECT * FROM batches")
     con.close()

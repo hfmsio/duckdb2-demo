@@ -1,13 +1,15 @@
 import duckdb
 from data import tickets
-from ui import act, say, show
+from common.ui import act, say, show
 
 
 def run(ctx):
     act(1, "Ingest JSON", "Infer a schema from raw JSON text, patch the types, build a typed table. Keep the raw text as VARIANT.")
     con = duckdb.connect(ctx["db"])
     con.execute("CREATE TABLE raw(id INT, payload VARCHAR)")
-    con.executemany("INSERT INTO raw VALUES (?, ?)", tickets(60))
+    say("Load the raw text with the new Python appender.")
+    with con.appender("raw") as appender:
+        appender.append_rows(tickets(60))
     show(con, "SELECT id, left(payload, 70) AS payload FROM raw", rows=2)
     say("Infer one shape from every row, then fix only the types we care about.")
     shape = con.execute("""SELECT json_merge_patch(json_group_structure(payload::JSON),
