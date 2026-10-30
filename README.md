@@ -36,6 +36,8 @@ Act 6 is a dry run by default and calls no model. `DEMO_LIVE=1` makes real calls
 
 ## Recipes
 
+![recipes](docs/recipes.gif)
+
 | Recipe | What it shows | Features |
 |---|---|---|
 | 1. Ship a dataset as one tiny file | 2M events as Parquet in `europe/` and `americas/` folders, shared through a 268 KB read-only catalog. | `PARTITION_PATH`, `ORDER_BY`, shredded `VARIANT`, read-only views |

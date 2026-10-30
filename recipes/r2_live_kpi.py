@@ -35,6 +35,7 @@ def run(ctx):
             while not done.is_set():
                 mine.append(c.execute("SELECT coalesce(orders, 0) FROM qk.kpi").fetchone()[0])
                 time.sleep(0.05)
+            mine.append(c.execute("SELECT coalesce(orders, 0) FROM qk.kpi").fetchone()[0])
             seen.append(mine)
         say("Four writers add 5 batches of 20 orders each while three dashboards keep reading.")
         readers = [threading.Thread(target=read, args=(i,)) for i in range(3)]
